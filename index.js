@@ -48,6 +48,7 @@ function post(request, response) {
 		cookies['session_id'] = newSessionId;
 		response.cookie = cookies;
                 response.setHeader('Set-Cookie', 'session_id=' + newSessionId);
+	response.setHeader("content-type", "text/html");
 		response.end(login.hello(newSessionId));
 	}
 	else
