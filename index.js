@@ -47,6 +47,7 @@ function post(request, response) {
 		var newSessionId = login.login(name,email);
 		cookies['session_id'] = newSessionId;
 		response.cookie = cookies;
+                response.setHeader('Set-Cookie', 'session_id=' + newSessionId);
 		response.end(login.hello(newSessionId));
 	}
 	else
@@ -87,6 +88,7 @@ function put(request, response) {
         	var newSessionId = login.login(name,email);
                 cookies['session_id'] = newSessionId;
         	response.cookie = cookies;
+                response.setHeader('Set-Cookie', 'session_id=' + newSessionId);
         	response.end("Re-freshed session id\n" +login.hello(newSessionId));
         }
         else
