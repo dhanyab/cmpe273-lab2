@@ -57,11 +57,19 @@ function post(request, response) {
 };
 
 function del(request, response) {
-	console.log("DELETE:: Logout from the server");
+//	console.log("DELETE:: Logout from the server");
 	var cookies = request.cookies;
 	var sid = cookies['session_id'];
+	if (login.isLoggedIn(sid) ) 
+	{
+        console.log("DELETE:: Logout from the server");
 	login.logout(sid);
   	response.end('Logged out from the server\n');
+}
+else
+{
+response.end("invalid session id!\n")
+}
 };
 
 function put(request, response) {
@@ -72,23 +80,23 @@ function put(request, response) {
 	console.log("sid is " + sid);
 	var name = login.getname(sid);
 	var email = login.getemail(sid);
-
+	login.logout(sid);
+	console.log("Removed the old id and creating new one...");	
         if(name!="")
         {
         	var newSessionId = login.login(name,email);
                 cookies['session_id'] = newSessionId;
         	response.cookie = cookies;
-        	response.end(login.hello(newSessionId));
+        	response.end("Re-freshed session id\n" +login.hello(newSessionId));
         }
         else
         {
         	response.end("Please enter name!");
 
         }
-
-	response.end("Re-freshed session id\n");
 };
 
 app.listen(8000);
 
 console.log("Node.JS server running at 8000...");
+

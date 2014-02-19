@@ -1,3 +1,4 @@
+
 /**
  * Login Class
  */
@@ -9,14 +10,14 @@ function Login() {
 }
 
 
-Login.prototype.getname = function(sessionId) {
+Login.prototype.getname = function(sId) {
 	console.log("method called");
-	var name = this.sessionMap[sessionId].name;
+	var name = this.sessionMap[sId].name;
 	return name;
 };
 
-Login.prototype.getemail = function(sessionId) {
-	var email = this.sessionMap[sessionId].email;
+Login.prototype.getemail = function(sId) {
+	var email = this.sessionMap[sId].email;
 	console.log(email);
 	return email;
 };
@@ -66,4 +67,3 @@ console.log("session id removed from map");
 
 // Export the Login class
 module.exports = new Login();
-
