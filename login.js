@@ -1,4 +1,3 @@
-
 /**
  * Login Class
  */
@@ -8,6 +7,22 @@ function Login() {
 		99999 : { name: 'Foo', email: 'foo@bar.com' }
 	};
 }
+
+
+Login.prototype.getname = function(sessionId) {
+	console.log("method called");
+	var name = this.sessionMap[sessionId].name;
+	return name;
+};
+
+Login.prototype.getemail = function(sessionId) {
+	var email = this.sessionMap[sessionId].email;
+	console.log(email);
+	return email;
+};
+
+
+
 /**
  * Say Hello {name} to the user
  */
@@ -42,6 +57,8 @@ Login.prototype.login = function(_name, _email) {
  */ 
 Login.prototype.logout = function(sessionId) {
 	console.log('logout::' + sessionId);
+delete this.sessionMap[sessionId];
+console.log("session id removed from map");
    /*
 	* TODO: Remove the given sessionId from the sessionMap
 	*/
@@ -49,3 +66,4 @@ Login.prototype.logout = function(sessionId) {
 
 // Export the Login class
 module.exports = new Login();
+
